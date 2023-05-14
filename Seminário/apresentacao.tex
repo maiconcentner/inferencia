@@ -12,6 +12,9 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 
+\theoremstyle{definition}
+\newtheorem{thm}{Teorema}[section]
+
 \title{Inferência Bayesiana}
 \author{Maicon Centner Germano}
 \institute{IBB UNESP}
@@ -97,13 +100,19 @@
 \section{Teorema de Bayes}
 \subsection{Breve revisão}
 \begin{frame}{Teorema de Bayes: revisão}
+Em sua forma básica, o Teorema de Bayes é simplesmente um resultado de probabilidade
+condicional:\\
+\
 
-    
+\textbf{Teorema de Bayes}
+\begin{thm}[1]
+    Se A e B são dois eventos com $P(A)>0$ então:
+    $$P(B|A)=\frac{P(A|B)P(B)}{P(A)}$$
+\end{thm}
 \end{frame}
 
-
-\begin{frame}{Teorema de Bayes}
-      
+\begin{frame}{Exemplo}
+    
 \end{frame}
 
 \section{Resumindo informação a posteriori}
