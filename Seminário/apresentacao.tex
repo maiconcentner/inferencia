@@ -16,7 +16,7 @@
 \newtheorem{thm}{Teorema}[section]
 
 \title{Inferência Bayesiana}
-\author{Maicon Centner Germano}
+\author{Maicon C. Germano}
 \institute{IBB UNESP}
 \date{\today}
 
@@ -111,14 +111,36 @@ condicional:\\
 \end{thm}
 \end{frame}
 
-\begin{frame}{Exemplo}
-    
+\begin{frame}{Exemplo 1}
+
+\justifying{\textbf{Exemplo 1}. Um procedimento de testes de diagnóstico para HIV é aplicado a uma população de alto risco; acredita-se que 10\% desta população é positiva para o HIV. O teste de diagnóstico é positivo para 90\% das pessoas que de fato são HIV-positivas, e negativo para 85\% das pessoas que não são HIV-positivas. Qual a probabilidade de resultados falso-positivo e falso-negativo?} \\
+
+\textbf{Notação:}
+
+$A$: a pessoa é HIV-positiva,
+$B$: o resultado do teste é positivo.
+Temos dados que $P(A)=0,1,P(B\mid A)=0,9$ e $P(\bar{B}\mid\bar{A})=0,85$. Então:
+
+$$P(\text{falso positivo})=P(\bar{A} \mid B)=\frac{P(B \mid \bar{A}) P(\bar{A})}{P(B)}$$ 
+$$=\frac{0,15 \times 0,9}{(0,15 \times 0,9)+(0,9 \times 0,1)}=0,6$$
+
 \end{frame}
 
-\section{Resumindo informação a posteriori}
+\begin{frame}{Continuação do exemplo 1}
+De forma similar,
+$$
+\begin{aligned}
+P(\text {falso negativo}) & =P(A \mid \bar{B}) \\ \\
+& =\frac{P(\bar{B} \mid A) P(A)}{P(\bar{B})} \\ \\
+& =\frac{0,1 \times 0,1}{(0,1 \times 0,1)+(0,85 \times 0,9)}=0,0129
+\end{aligned}
+$$
+\end{frame}
 
 \begin{frame}{Resumindo informação a posteriori}
 \subsection{Intervalos de credibilidade}
+\textbf{Intervalos de credibilidade}
+
 
 \subsection{Teste de hipóteses}
     
