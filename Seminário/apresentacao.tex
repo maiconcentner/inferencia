@@ -1,0 +1,124 @@
+\documentclass{beamer}
+
+\usetheme{Madrid}
+\setbeamersize{text margin right=0.8cm}
+\setbeamersize{text margin left=0.8cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{ragged2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{Inferência Bayesiana}
+\author{Maicon Centner Germano}
+\institute{IBB UNESP}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Sumário}
+  \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\subsection{O que é inferência Bayesiana?}
+\begin{frame}{O que é inferência Bayesiana?}
+\begin{itemize}
+\item \justifying{A inferência Bayesiana é um método estatístico que leva em conta informações prévias sobre o que está sendo analisado.}
+\vspace{0.2cm}
+\item Ela combina essas informações com os novos dados que estão sendo analisados para chegar a uma conclusão mais precisa e confiável.
+\vspace{0.2cm}
+\item O parâmetro populacional $\theta$ é tratado como uma quantidade aleatória, o que leva a abordagens substancialmente diferentes à modelagem e inferência em comparação à inferência clássica.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{O que é inferência Bayesiana?}
+\begin{itemize}
+\item \justifying{A inferência Bayesiana é baseada em $f(\theta \mid y)$ ao invés de se basear em $f(y \mid \theta)$, ou seja, na probabilidade do parâmetro condicional aos dados obtidos.}
+\vspace{0.2cm}
+\item Para utilizar a inferência Bayesiana, é necessário especificar uma distribuição a priori de probabilidades $f(\theta)$ que representa as crenças sobre a distribuição de $\theta$ antes de se considerar qualquer informação proveniente dos dados.
+\vspace{0.2cm}
+\item A noção de distribuição a priori para o parâmetro $\theta$ está no cerne do pensamento bayesiano.
+
+\end{itemize}
+    
+\end{frame}
+
+\subsection{Inferência Bayesiana vs. Clássica}
+\begin{frame}{Inferência Bayesiana vs. Clássica}
+    
+    \begin{itemize}
+    
+    \item \justifying{Existem diferentes maneiras de analisar dados e chegar a conclusões estatísticas. Duas dessas maneiras são a inferência Bayesiana e a inferência clássica.}
+    \vspace{1cm}
+    \item A inferência Bayesiana é um método que permite que se leve em conta informações prévias sobre o que está sendo analisado, como experiências anteriores ou conhecimentos sobre o assunto. Ela combina essas informações com os novos dados que estão sendo analisados, para chegar a uma conclusão mais precisa e confiável. 
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Inferência Bayesiana vs. Clássica}
+ \begin{itemize}
+    \item \justifying{Já a inferência clássica é uma maneira mais tradicional de analisar dados, sem levar em conta informações prévias. Nesse método, são usados estimadores de máxima verossimilhança, que buscam encontrar a estimativa mais provável dos parâmetros do modelo que está sendo analisado.}
+    \vspace{1cm}
+    \item A principal diferença entre esses dois métodos é que a inferência Bayesiana leva em conta informações prévias, enquanto a inferência clássica não o faz. Isso pode fazer com que a inferência Bayesiana seja mais precisa e confiável em algumas situações.
+    \end{itemize}
+    
+\end{frame}
+
+\subsection{Distribuição a priori}
+\begin{frame}{Distribuição a priori}
+\begin{itemize}
+\item \justifying{Ao tentar estimar um parâmetro $\theta$, é comum ter algum conhecimento ou crença prévia sobre o valor de $\theta$ antes de considerar os dados.
+\vspace{0.2cm}
+\item A distribuição a priori representa a crença prévia sobre o valor de $\theta$, antes de observar os dados.}
+\vspace{0.2cm}
+\item A informação da distribuição a priori é combinada com a informação dos dados para obter a distribuição a posteriori, que reflete a crença atualizada sobre o valor de $\theta$.
+\end{itemize}
+\end{frame}
+\begin{frame}{Distribuição a Priori}
+\begin{itemize}
+\item \justifying{A distribuição a priori pode ser baseada em conhecimento prévio, experiências anteriores, especialistas ou modelos teóricos.}
+\vspace{0.2cm}
+\item \justifying{A distribuição a priori pode influenciar as inferências feitas a partir dos dados, pois pode levar a diferentes distribuições a posteriori e conclusões diferentes.}
+\vspace{0.2cm}
+\item A escolha da distribuição a priori pode ser subjetiva e pode levar a diferentes inferências entre diferentes indivíduos ou grupos.
+\end{itemize}
+    
+\end{frame}
+
+\section{Teorema de Bayes}
+\subsection{Breve revisão}
+\begin{frame}{Teorema de Bayes: revisão}
+
+    
+\end{frame}
+
+
+\begin{frame}{Teorema de Bayes}
+      
+\end{frame}
+
+\section{Resumindo informação a posteriori}
+
+\begin{frame}{Resumindo informação a posteriori}
+\subsection{Intervalos de credibilidade}
+
+\subsection{Teste de hipóteses}
+    
+\end{frame}
+
+\section{Aplicação na radioterapia}
+
+\begin{frame}{Aplicação na Radioterapia}
+    
+\end{frame}
+ 
+\end{document}
