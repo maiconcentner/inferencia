@@ -111,7 +111,8 @@ condicional:\\
 \end{thm}
 \end{frame}
 
-\begin{frame}{Exemplo 1}
+\subsection{Exemplo 1}
+\begin{frame}{Teorema de Bayes}
 
 \justifying{\textbf{Exemplo 1}. Um procedimento de testes de diagnóstico para HIV é aplicado a uma população de alto risco; acredita-se que 10\% desta população é positiva para o HIV. O teste de diagnóstico é positivo para 90\% das pessoas que de fato são HIV-positivas, e negativo para 85\% das pessoas que não são HIV-positivas. Qual a probabilidade de resultados falso-positivo e falso-negativo?} \\
 
@@ -136,18 +137,143 @@ P(\text {falso negativo}) & =P(A \mid \bar{B}) \\ \\
 \end{aligned}
 $$
 \end{frame}
-
+\section{Intervalos de credibilidade}
 \begin{frame}{Resumindo informação a posteriori}
-\subsection{Intervalos de credibilidade}
+\subsection{Resumindo informação a posteriori}
 \textbf{Intervalos de credibilidade}
+\begin{itemize}
+\item \justifying{A ideia do intervalo de credibilidade é criar um análogo ao intervalo de confiança da estatística frequentista.}
+\item Estimativas pontuais não fornecem uma medida de precisão, portanto, é preferível informar um intervalo no resultado das análises.
+\item Na estatística frequentista, isso causa problemas, pois os parâmetros não são considerados aleatórios, tornando impossível dar um intervalo com a interpretação de que há uma certa probabilidade de o parâmetro estar dentro do intervalo.
+\item Em vez disso, os intervalos de confiança devem ser interpretados como se a amostragem fosse repetida inúmeras vezes, haveria uma probabilidade especificada de que o intervalo contivesse o parâmetro - ou seja, o intervalo é aleatório e não o parâmetro.
+\end{itemize}
+\end{frame}
 
+\subsection{Região de credibilidade}
+\begin{frame}{Intervalos de credibilidade}
+Na abordagem bayesiana, os parâmetros são tratados como aleatórios. Assim, uma região $C_\alpha(y)$ é uma região de credibilidade $100(1- \alpha)\%$ para $\theta$ se \\
+\begin{equation}
+    \int_{C_\alpha(y)} f(\theta \mid y) \mathrm{d} \theta=1-\alpha.
+    \vspace{0.8cm}
+\end{equation}
 
-\subsection{Teste de hipóteses}
-    
+Ou seja, existe uma probabilidade de $1- \alpha$, com base na distribuição posteriori, que $\theta$ esteja contido em $C_\alpha(y)$.
+\end{frame}
+
+\begin{frame}{Intervalos de credibilidade}
+\begin{itemize}
+\item Uma dificuldade com o intervalo de credibilidade (que também ocorre com intervalos de confiança), é que eles não são unicamente definidos.
+\item Qualquer região com probabilidade $1-\alpha$ é um intervalo válido.
+\item Deseja-se um intervalo que contenha apenas os valores mais plausíveis do parâmetro, por isso é habitual impor uma restrição adicional, que a largura do intervalo seja tão pequena quanto possível.
+\item Isso equivale a um intervalo (ou região) da forma: $C_\alpha(y)={\{\theta: f(\theta \mid y) \geq \gamma\}}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Intervalos de credibilidade}
+Em que $\gamma$ é escolhido para garantir que:
+$$\int_{C_\alpha(y)} f(\theta \mid y) \mathrm{d} \theta=1-\alpha$$
+\justifying{Tais regiões são chamadas de regiões com mais alta densidade posteriori (HPD). Esses intervalos são encontrados numericamente, embora existam valores tabulados para algumas distribuições posteriores univariadas. É importante lembrar que a escolha do valor de $\alpha$ pode afetar a largura do intervalo, resultando em um "perde/ganha": um valor pequeno resulta em um intervalo largo, enquanto um valor grande resulta em um intervalo com baixa probabilidade de conter o parâmetro.}
+\end{frame}
+\subsection{Exemplo 2}
+\begin{frame}{Intervalos de credibilidade}
+\justifying{
+\textbf{Exemplo 2.} (Média normal.) Sejam $Y_1, \ldots, Y_n$ variáveis independentes de uma distribuição $N\left(\theta, \sigma^2\right)$, ( $\sigma^2$ conhecido) com uma priori para $\theta$ da forma $\theta \sim N\left(b, d^2\right)$.} \\
+\vspace{0.5cm}
+\textbf{Resolução:} \\
+Com essas informações, obtém-se a posteriori:
+\begin{equation}
+    \theta \mid y \sim N\left(\frac{\frac{b}{d^2}+\frac{n \bar{y}}{\sigma^2}}{\frac{1}{d^2}+\frac{n}{\sigma^2}}, \frac{1}{\frac{1}{d^2}+\frac{n}{\sigma^2}}\right)
+\end{equation}
+\end{frame}  
+
+\subsection{Como obter a posteriori a partir do exemplo 2?}
+\begin{frame}{Como obter a posteriori}
+\justifying{
+A essência da abordagem bayesiana é tratar o parâmetro desconhecido $\theta$ como uma variável aleatória, especificar uma distribuição a priori para $\theta$ que represente as convicções sobre $\theta$ antes de ver os dados, usar o Teorema de Bayes para atualizar as convicções a priori na forma de probabilidades a posteriori e fazer inferências apropriadas. Portanto há quatro passos característicos da abordagem bayesiana:}
+\vspace{0.5cm}
+\begin{enumerate}
+    \item especificação da verossimilhança do modelo $L(\theta \mid y) \equiv f(y \mid \theta)$;
+    \item determinação da priori $f(\theta)$;
+    \item cálculo da distribuição posteriori $f(\theta|y)$,obtida pelo Teorema de Bayes;
+    \item extrair inferências da distribuição posteriori.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Como obter a posteriori}
+O Teorema da Bayes expresso em termos de variáveis aleatórias, com densidades denotadas genericamente por $f(.)$, tem a forma:
+    \begin{equation}
+    f(\theta \mid y)=\frac{f(\theta) f(y \mid \theta)}{f(y)}=\frac{f(\theta) f(y \mid \theta)}{\int f(\theta) f(y \mid \theta) \mathrm{d} \theta}
+    \end{equation}
+    No caso contínuo $f$ é a função de densidade de probabilidade como usual, mas no caso discreto, $f$ é a função de massa de probabilidade de $Y~[P(Y=y)]$. De forma similar, $\theta$ pode ser discreto ou contínuo mas, caso seja discreto, $\int f(\theta) f(y \mid \theta) \mathrm{d} \theta$ deve ser interpretado como $\sum_j f\left(\theta_j\right) f\left(y \mid \theta_j\right)$.
+    Pode-se então dizer que:
+    $$posteriori=\frac{priori \times verossimilhança}{marginal}$$
+
+\end{frame}
+
+\begin{frame}{Como obter a posteriori}
+    \justifying{Note que o denominador no Teorema de Bayes é uma função apenas de $y$, resultante de uma integração em $\theta$ (ou seja, $\theta$ foi "integrado fora"). Desta forma, uma outra maneira de escrever o Teorema de Bayes é:}
+$$f(\theta \mid y) \propto f(\theta) f(y \mid \theta)$$
+ou, em palavras, "a posteriori é proporcional à priori vezes a verossimilhança”.
+\end{frame}
+\begin{frame}{Como obter a posteriori}
+\justifying{
+\textbf{Voltando ao nosso exemplo:} (Média normal.) Sejam $Y_1, \ldots, Y_n$ variáveis aleatórias independentes com uma distribuição $N\left(\theta, \sigma^2\right)$, em que $\sigma^2$ é conhecido.}\\
+Então,
+\begin{equation}
+  f\left(y_i \mid \theta\right)=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left\{-\frac{\left(y_i-\theta\right)^2}{2 \sigma^2}\right\}
+\end{equation}
+e a verossimilhança fica
+\begin{equation}
+  L(\theta \mid y) =\left(2 \pi \sigma^2\right)^{-n / 2} \exp \left\{-\frac{\sum_{i=1}^n\left(y_i-\theta\right)^2}{2 \sigma^2}\right\}
+  \end{equation}
+  $$\propto \exp \left\{-\frac{\sum_{i=1}^n\left(y_i-\theta\right)^2}{2 \sigma^2}\right\}$$
 \end{frame}
 
 \section{Aplicação na radioterapia}
 
+\begin{frame}{Como obter a posteriori}
+   Após algum algebrismo é possível mostrar que esta expressão pode ser escrita na
+forma
+\begin{equation}
+    L(\theta \mid y) \propto \exp \left\{-\frac{(\theta-\bar{y})^2}{2\left(\sigma^2 / n\right)}\right\}
+\end{equation}
+Agora, suponha que as convicções a priori sobre $\theta$ podem elas mesmas serem representadas por uma distribuição normal $\theta \sim \mathrm{N}\left(b, d^2\right)$.
+\end{frame}
+
+\begin{frame}{Como obter a posteriori}
+    
+Novamente, esta escolha visa obter uma análise matemática simples, mas deve apenas ser usada se tal escolha é de fato uma boa aproximação à crença a priori sobre $\theta$. Então, pelo Teorema de Bayes,
+$$
+\begin{aligned}
+f(\theta \mid y) & \propto \exp \left\{-\frac{(\theta-b)^2}{2 d^2}\right\} \exp \left\{-\frac{(\theta-\bar{y})^2}{2\left(\sigma^2 / n\right)}\right\} \\
+& =\exp \left\{-\frac{1}{2}\left[\frac{(\theta-b)^2}{d^2}+\frac{(\theta-\bar{y})^2}{\sigma^2 / n}\right]\right\} \\
+& \propto \exp \left\{-\frac{1}{2}\left[\left(\frac{1}{d^2}+\frac{1}{\sigma^2 / n}\right) \theta^2-2 \theta\left(\frac{b}{d^2}+\frac{\bar{y}}{\sigma^2 / n}\right)\right]\right\} \\
+& \propto \exp \left\{-\frac{1}{2}\left(\frac{1}{d^2}+\frac{1}{\sigma^2 / n}\right)\left[\left(\theta-\frac{\frac{b}{d^2}+\frac{\bar{y}}{\sigma^2 / n}}{\frac{1}{d^2}+\frac{1}{\sigma^2 / n}}\right)^2\right]\right\}
+\end{aligned}
+$$
+\end{frame}
+
+\begin{frame}{Como obter a posteriori}
+    Portanto,
+    \begin{equation}
+        \theta \mid y \sim \mathrm{N}\left(\frac{\frac{b}{d^2}+\frac{n \bar{y}}{\sigma^2}}{\frac{1}{d^2}+\frac{n}{\sigma^2}}, \frac{1}{\frac{1}{d^2}+\frac{n}{\sigma^2}}\right)
+          \vspace{0.8cm}
+    \end{equation}
+  
+    que é igual a equação 2 do nosso exemplo.
+\end{frame}
+
+\begin{frame}{Continuação do exemplo}
+\justifying{Agora, como a distribuição Normal é unimodal e simétrica, a região HPD de $100(1-\alpha) \%$ para $\theta$ é:}
+$$
+\left(\frac{\frac{b}{d^2}+\frac{n \bar{y}}{\sigma^2}}{\frac{1}{d^2}+\frac{n}{\sigma^2}}\right) \pm z_{\alpha / 2}\left(\frac{1}{\frac{1}{d^2}+\frac{n}{\sigma^2}}\right)^{\frac{1}{2}}
+$$
+em que $z_{\alpha / 2}$ é o ponto com porcentagem desejada da distribuição normal padrão $N(0,1)$. Note, além do mais que à medida que $d \rightarrow \infty$ o intervalo se torna:
+$$
+\bar{y} \pm z_{\alpha / 2} \frac{\sigma}{\sqrt{n}}
+$$
+que é precisamente o intervalo de confiança para $100(1-\alpha) \%$ de $\theta$ obtido em inferência clássica. Neste caso especial, o intervalo de credibilidadea e o intervalo de confiança são idênticos, embora as suas interpretações sejam bastante diferentes.
+\end{frame}
 \begin{frame}{Aplicação na Radioterapia}
     
 \end{frame}
