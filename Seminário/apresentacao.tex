@@ -15,8 +15,10 @@
 \theoremstyle{definition}
 \newtheorem{thm}{Teorema}[section]
 
-\title{Inferência Bayesiana}
+\title{Filtros Bayesianos}
+\subtitle{Princípios de Inferência Estatística}
 \author{Maicon C. Germano}
+
 \institute{IBB UNESP}
 \date{\today}
 
@@ -107,7 +109,7 @@ condicional:\\
 \textbf{Teorema de Bayes}
 \begin{thm}[1]
     Se A e B são dois eventos com $P(A)>0$ então:
-    $$P(B|A)=\frac{P(A|B)P(B)}{P(A)}$$
+    $$P(B \mid A)=\frac{P(A|B)P(B)}{P(A)}$$
 \end{thm}
 \end{frame}
 
@@ -172,7 +174,7 @@ Ou seja, existe uma probabilidade de $1- \alpha$, com base na distribuição pos
 \begin{frame}{Intervalos de credibilidade}
 Em que $\gamma$ é escolhido para garantir que:
 $$\int_{C_\alpha(y)} f(\theta \mid y) \mathrm{d} \theta=1-\alpha$$
-\justifying{Tais regiões são chamadas de regiões com mais alta densidade posteriori (HPD). Esses intervalos são encontrados numericamente, embora existam valores tabulados para algumas distribuições posteriores univariadas. É importante lembrar que a escolha do valor de $\alpha$ pode afetar a largura do intervalo, resultando em um "perde/ganha": um valor pequeno resulta em um intervalo largo, enquanto um valor grande resulta em um intervalo com baixa probabilidade de conter o parâmetro.}
+\justifying{Tais regiões são chamadas de regiões com mais alta densidade posteriori (HPD). Esses intervalos são encontrados numericamente, embora existam valores tabulados para algumas distribuições posteriores uni-variadas. É importante lembrar que a escolha do valor de $\alpha$ pode afetar a largura do intervalo, resultando em um "perde/ganha": um valor pequeno resulta em um intervalo largo, enquanto um valor grande resulta em um intervalo com baixa probabilidade de conter o parâmetro.}
 \end{frame}
 \subsection{Exemplo 2}
 \begin{frame}{Intervalos de credibilidade}
@@ -194,25 +196,32 @@ A essência da abordagem bayesiana é tratar o parâmetro desconhecido $\theta$ 
 \begin{enumerate}
     \item especificação da verossimilhança do modelo $L(\theta \mid y) \equiv f(y \mid \theta)$;
     \item determinação da priori $f(\theta)$;
-    \item cálculo da distribuição posteriori $f(\theta|y)$,obtida pelo Teorema de Bayes;
+    \item cálculo da distribuição posteriori $f(\theta \mid y)$,obtida pelo Teorema de Bayes;
     \item extrair inferências da distribuição posteriori.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Como obter a posteriori}
-O Teorema da Bayes expresso em termos de variáveis aleatórias, com densidades denotadas genericamente por $f(.)$, tem a forma:
+    \begin{frame}{Como obter a posteriori}
+    O Teorema da Bayes expresso em termos de variáveis aleatórias, com densidades denotadas genericamente por $f(.)$, tem a forma:
     \begin{equation}
-    f(\theta \mid y)=\frac{f(\theta) f(y \mid \theta)}{f(y)}=\frac{f(\theta) f(y \mid \theta)}{\int f(\theta) f(y \mid \theta) \mathrm{d} \theta}
+    f(\theta \mid y)=\frac{f(\theta) f(y \mid \theta)}{f(y)}=\frac{f(\theta) f(y \mid \theta)}{\int f(\theta) f(y \mid \theta) d \theta}
     \end{equation}
-    No caso contínuo $f$ é a função de densidade de probabilidade como usual, mas no caso discreto, $f$ é a função de massa de probabilidade de $Y~[P(Y=y)]$. De forma similar, $\theta$ pode ser discreto ou contínuo mas, caso seja discreto, $\int f(\theta) f(y \mid \theta) \mathrm{d} \theta$ deve ser interpretado como $\sum_j f\left(\theta_j\right) f\left(y \mid \theta_j\right)$.
+    No caso contínuo $f$ é a função de densidade de probabilidade como usual, mas no caso discreto, $f$ é a função de massa de probabilidade de $Y~[P(Y=y)]$. De forma similar, $\theta$ pode ser discreto ou contínuo mas, caso seja discreto, $\int f(\theta) f(y \mid \theta) d \theta$ deve ser interpretado como $\sum_j f\left(\theta_j\right) f\left(y \mid \theta_j\right)$.
+    
     Pode-se então dizer que:
-    $$posteriori=\frac{priori \times verossimilhança}{marginal}$$
-
-\end{frame}
+    
+    \begin{equation}
+        posteriori=\frac{priori \times verossimilhança}{marginal}
+    \end{equation}
+    
+    \end{frame}
 
 \begin{frame}{Como obter a posteriori}
     \justifying{Note que o denominador no Teorema de Bayes é uma função apenas de $y$, resultante de uma integração em $\theta$ (ou seja, $\theta$ foi "integrado fora"). Desta forma, uma outra maneira de escrever o Teorema de Bayes é:}
-$$f(\theta \mid y) \propto f(\theta) f(y \mid \theta)$$
+    \begin{equation}
+        f(\theta \mid y) \propto f(\theta) f(y \mid \theta)
+    \end{equation}
+    
 ou, em palavras, "a posteriori é proporcional à priori vezes a verossimilhança”.
 \end{frame}
 \begin{frame}{Como obter a posteriori}
@@ -229,7 +238,6 @@ e a verossimilhança fica
   $$\propto \exp \left\{-\frac{\sum_{i=1}^n\left(y_i-\theta\right)^2}{2 \sigma^2}\right\}$$
 \end{frame}
 
-\section{Aplicação na radioterapia}
 
 \begin{frame}{Como obter a posteriori}
    Após algum algebrismo é possível mostrar que esta expressão pode ser escrita na
@@ -274,8 +282,158 @@ $$
 $$
 que é precisamente o intervalo de confiança para $100(1-\alpha) \%$ de $\theta$ obtido em inferência clássica. Neste caso especial, o intervalo de credibilidadea e o intervalo de confiança são idênticos, embora as suas interpretações sejam bastante diferentes.
 \end{frame}
+\section{Aplicação na radioterapia}
 \begin{frame}{Aplicação na Radioterapia}
+    \begin{center}
+        \textbf{ESTIMATIVA DE ESTADO E DE PARÂMETROS EM MODELAGEM DO TRATAMENTO DE TUMOR PROSTÁTICO
+VIA RADIOTERAPIA E HORMONIOTERAPIA}
+    \end{center}
+    \begin{center}
+        Prof. Dr. José Mir Justino da Costa \\
+        Prof. Dr. Jeremias da Silva Leão
+    \end{center}
+\end{frame}
+
+\begin{frame}{Resumo do trabalho}
+    \begin{itemize}
+    \justifying{
+        \item Neste trabalho, foi apresentada uma adaptação de um modelo matemático existente na literatura para tratar o câncer de próstata utilizando radioterapia e hormonioterapia em conjunto.}
+        \vspace{0.2cm}
+        \item O modelo adaptado é composto por um sistema de equações diferenciais acopladas.
+        \vspace{0.2cm}       
+        \item Como o trabalho está relacionado a Problemas Inversos, foi utilizada uma análise inversa com um filtro Bayesiano.
+        \vspace{0.2cm}   
+        \item Estima as variáveis de estado e parâmetros do modelo.
+        \vspace{0.2cm}
+        \item A qualidade do ajuste foi avaliada usando o erro quadrático médio (EQM).
+    \end{itemize}
+\end{frame}
+ \begin{frame}{Objetivo geral}
+ \justifying{
+     Apresentar um modelo matemático da literatura, baseado em Equações Diferenciais Ordinárias (EDO) e modificá-lo para incorporar tratamento de câncer de próstata via radioterapia e hormonioterapia, bem como usar filtro Bayesiano para estimativa combinada de estados e parâmetros.}
+ \end{frame}
+ \begin{frame}{Geração de medidas}
+    \justifying{Para a geração das medidas que foram utilizadas neste trabalho adotamos o seguinte:
+$$
+\eta_{medido}=\eta_{simulado }+\varepsilon
+$$
+Em que, $\eta_{medido}$, resulta da soma de $\eta_{simulado }$, que é a solução do problema direto e de $\varepsilon$. Aqui consideramos $\varepsilon$ como uma variável aleatória tendo distribuição normal, com média igual a zero e variância conhecida e igual a 5\% do valor máximo de cada população medida. Vale ressaltar que foi gerado medidas apenas para a população de células normais e tumorais.}
+ \end{frame}
+\begin{frame}{Solução do Problema Inverso}
+    \begin{itemize}
+    \justifying{
+        \item Os problemas inversos formam um conjunto de problemas matemáticos onde se objetiva determinar a causa de um fenômeno particular (solução do problema), observando-se
+         o efeito por ele produzido (dados).
+         \vspace{0.4cm}
+         \item Neste trabalho foi utilizado o filtro de partículas proposto por (LIU; WEST, 2001) para estimar simultaneamente os estados do processo (população celular) e os parâmetros do modelo matemático modificado.}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Filtro de Partículas}
+    Em um problema de estimativa de estado consideramos o seguinte modelo de evolução:
+\begin{equation}
+    x_k=f\left(x_{k-1}, v_{k-1}\right)
+\end{equation}
+onde,
+\begin{itemize}
+\justifying{
+    \item \textbf{x} é o vetor de estado que contém todas as variáveis que serão estimadas dinamicamente
+    \item o subscrito $k=1,2,...$, representa o instante de tempo $t$
+    \item $f$ é geralmente uma função não linear das variáveis de estado \textbf{x} e do vetor de incertezas \textbf{v}}
+\end{itemize}
+\end{frame}
+\begin{frame}{Filtro de Partículas}
+\justifying{
+Sendo $z_k \in \boldsymbol{R}^n$ as medidas observadas e $\eta \in R^n$ as incertezas associadas a essas medidas, podemos considerar o modelo de observação ou de medidas como:}
+
+\begin{equation}
+    {z}_{k}={h}({x}_{k}, \eta_{k})
+    \vspace{1cm}
+\end{equation}
+
+O problema de estimação de estado tem por objetivo obter informações sobre $x_k$ baseado nas equações (10 - 11), e as seguintes suposições são feitas:
+\end{frame}
+
+\begin{frame}{Filtro de Partículas}
+\justifying{
+(i) A sequência $x_k$ para $k=1,2, \ldots$ é um processo Markoviano de primeira ordem, ou seja
+$$
+\pi\left(x_k \mid x_0, x_1, \ldots, x_{k-1}\right)=\pi\left(x_k \mid x_{k-1}\right)
+$$
+(ii) A sequência $\mathbf{z}_{\mathbf{k}}$ para $k=1,2, \ldots$ é um processo Markoviano com respeito a história de $\mathbf{x}_{\mathbf{k}}$, isto é:
+$$
+\pi\left(z_k \mid z_0, z_1, \ldots, z_{k-1}\right)=\pi\left(z_k \mid z_{k-1}\right)
+$$
+(iii) A sequência $x_k$ depende das observações passadas através da sua própria história, ou seja:
+$$
+\pi\left(x_k \mid x_{k-1}, z_{1: k-1}\right)=\pi\left(x_k \mid x_{k-1}\right)
+$$
+onde a expressão $\pi(a \mid b)$ representa a densidade de probabilidade de $a$ dado $b$.}
+\end{frame}
+
+\begin{frame}{Filtro de Partículas}
+\justifying{
+Outras suposições também são feitas, tais como (KAIPIO; SOMERSALO, 2006): \\
+\vspace{0.2cm}
+(a) Os vetores de ruídos $\boldsymbol{v}_i$ e $v_j$ para $i \neq j$, bem como $\eta_i$ e $\eta_j$ são mutuamente independentes e mutuamente independentes do estado inicial $\mathbf{x}_{\mathbf{0}}$. \\
+\vspace{0.2cm}
+(b) Os vetores $v_i$ e $\eta_i$ são mutuamente independente para todos os valores de $i \neq j$. \\
+\vspace{0.2cm}
+Sendo $\pi\left(x_0 \mid z_0\right)=\pi\left(x_0\right)$ uma informação a priori no instante inicial $t_0$ em um problema de filtragem o objetivo é obter uma aproximação da distribuição a posteriori $\pi\left(x_k \mid z_{1: k}\right)$. Esta posteriori é obtida em dois passos: previsão e atualização.}
     
 \end{frame}
+
+\begin{frame}{Filtro de Partículas}
+\justifying{
+    Como neste trabalho estamos interessados na estimativa combinada de estados e parâmetros,
+usoou-se o filtro de (LIU; WEST, 2001) que é uma generalização do filtro ASIR.
+\vspace{0.5cm}
+Neste filtro a inferência é feita sobre a densidade a posteiori conjunta $\pi\left(x_k, \theta \mid z_{1: k}\right)$. Sendo $\theta$ o vetor de parâmetros e $\boldsymbol{x}_k$ as variáveis de estado.
+(LIU; WEST, 2001) assume que para um vetor de parâmetros estáticos $\theta$ a aproximação da densidade a posteriori $\pi\left(\theta \mid z_k\right)$ é feita por densidade suavizada via kernel}
+\begin{equation}
+    \pi\left(\theta \mid z_k\right) \approx \sum_{i=1}^N w_k^i N\left(\theta \mid m_k^i, h^2 V_k\right)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Filtro de Partículas}
+\justifying{Dessa forma temos que a distribuição artificial do parâmetros $\boldsymbol{\theta}$ é representada pela mistura ponderada por $\boldsymbol{w}_k^i$ de distribuições normais com média $\boldsymbol{m}_{\boldsymbol{k}}^i$ e variância $h^2 \boldsymbol{V}_k$ ((LIU; WEST, 2001),(COSTA, 2015)). \vspace{0.5cm}
+
+A sugestão ainda de (LIU; WEST, 2001) é a de que a constante $h$, parâmetro de suavização, seja escolhida como uma função suave e decrescente com relação a $N$. Outras considerações feitas foram que:}
+    
+\end{frame}
+
+\begin{frame}{Filtro de Partículas}
+\begin{equation}
+    \boldsymbol{m}_k^i =a \boldsymbol{\theta}_k^i+(1-a) \overline{\boldsymbol{\theta}}_k .
+\end{equation}
+\begin{equation}
+    a  =\sqrt{\left(1-h^2\right)} .
+\end{equation}
+ \begin{equation}
+     \overline{\boldsymbol{\theta}} =\frac{1}{N} \sum_{i=1}^N \boldsymbol{\theta}_k^i . 
+ \end{equation}
  
+\begin{equation}
+    \boldsymbol{V}_k =\frac{1}{N} \sum_{i=1}^N\left(\boldsymbol{\theta}_k^i-\overline{\boldsymbol{\theta}}\right)\left(\boldsymbol{\theta}_k^i-\overline{\boldsymbol{\theta}}\right)^T,
+\end{equation}
+
+onde $T$ denota o transposto da matriz, $a$ está relacionado a um fator de desconto $\delta$ de acordo com (LIU; WEST, 2001) da seguinte forma :
+\begin{equation}
+    a=\frac{3 \delta-1}{2 \delta}
+\end{equation}
+
+\end{frame}
+\begin{frame}{Resultados}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{teste_1.png}
+    \label{fig:teste}
+\end{figure}
+
+\end{frame}
+
+\section{Conclusão}
+\begin{frame}{Conclusão}
+    \justifying{A utilização do filtro de partículas para estimativa combinada de variáveis de estado e parâmetros funcionou de forma bastante satisfatória. Até mesmo para a variável, população de células imunológicas a qual não tínhamos medida, o filtro conseguiu boa estimativa quando utilizadas 5000 partículas. Com relação aos parâmetros também foram obtidos, em geral, um bom ajuste quando comparados aos valores exatos. Dada a natureza não linear do modelo utilizado alguns parâmetros precisaram de quantidade de partículas maiores do que para outros parâmetros.}
+\end{frame}
 \end{document}
